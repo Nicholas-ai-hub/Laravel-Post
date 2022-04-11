@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']); // რატომ ვწერთ ასეთი ფორმით ამ კონტროლერში?
+        $this->middleware('auth'); // რატომ ვწერთ ასეთი ფორმით ამ კონტროლერში?
     }
 
     public function index()

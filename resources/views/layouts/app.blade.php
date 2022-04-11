@@ -13,36 +13,40 @@
             <li>
                 <a href="/" class="p-3">Home</a>
             </li>
-            <li>
-                <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a><!---
-            dashboard აჩვენებს დარეგისტრირებული მომხმარებლის მონაცემებს, ამიტომ გვჭირდება ამ
-            როუტს გავუწეროთ შუამავალი, იგივე middleware
-            -->
-            </li>
-            <li>
-                <a href="{{ route('posts') }}" class="p-3">Post</a>
-            </li>
+            @auth
+                <li>
+                    <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a><!---
+                dashboard აჩვენებს დარეგისტრირებული მომხმარებლის მონაცემებს, ამიტომ გვჭირდება ამ
+                როუტს გავუწეროთ შუამავალი, იგივე middleware
+                -->
+                </li>
+                <li>
+                    <a href="{{ route('posts') }}" class="p-3">Post</a>
+                </li>
+            @endauth
         </ul>
 
         <ul class="flex items-center">
-            @if(auth()->user()) <!---  თუ მომხმარებელი დარეგისტრირებულია(if user is signed in show me this)--->
+            @auth <!---  თუ მომხმარებელი დარეგისტრირებულია(if user is signed in show me this)--->
             <li>
                 <a href="" class="p-3">{{  auth()->user()->name }}</a><!--- ამ სახით უკავშირდება user ობიექტს, რომელიც უკავშირდება მონაცემთა ბაზას და ბეჭდავს მხოლოდ სახელს---->
             </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" class="p-3 inline">
                     @csrf
-                <button type="submit">Log out</button>
-            </from>
+                    <button type="submit">Log out</button>
+                </form>
             </li>
-            @else <!--- if he is not signed in show me this, @ ეს უბრალოდ blade-ის სინტაქსია ----->
-            <li>
-                <a href="{{ route('login') }}" class="p-3">Log in</a>
-            </li>
-            <li>
-                <a href="{{ route('register') }}" class="p-3">Register</a>
-        </li>
-            @endif
+            @endauth
+
+            @guest <!--- if he is not signed in show me this, @ ეს უბრალოდ blade-ის სინტაქსია ----->
+                <li>
+                    <a href="{{ route('login') }}" class="p-3">Log in</a>
+                </li>
+                <li>
+                    <a href="{{ route('register') }}" class="p-3">Register</a>
+                </li>
+            @endguest
         </ul>
 
 <!-- ასევე გვაქვს მეორე და უკეთესი(ალბათ) ვარიანტი, if else-ის ნაცვლად იქნება auth და guest
