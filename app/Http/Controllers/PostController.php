@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
     public function index()
     {
-         $posts = Post::paginate(2);
+        $posts = Post::paginate(2);
 
-         return view('posts.index', [
-             'posts' => $posts
-         ]);
+        return view('posts.index', [
+            'posts' => $posts
+        ]);
     
     }
 
@@ -26,6 +27,7 @@ class PostController extends Controller
         3) ვარკვევთ მოდელებს Post.php და User.php შორის ურთიერკავშირს, ამიტომ გვინდა ამ ფუნქციაში და ან კონტროლერში ვალიდაცია
         */
        //გაიყვანეთ მოთხოვნები($request-ს რატომაც ვწერთ ვალიდაციაშო), რომლითაც შეგიძლიათ ამოიღოთ ყველა ინფორმაცია
+
         $this->validate($request,[
             'body' => 'required'
         ]);
